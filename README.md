@@ -1,15 +1,25 @@
-What is the size of Mycoplasma genitalium genome?
+# Mini Project #1: Where are the Genes
 
-How many genes does it include?
+Implement a gene-finding algorithm that examines open reading frames and finds subsequences that span from the start codon to the stop codon. Use the full genome of the Mycoplasma genitalium (NCBI ID is [NC_000908](https://www.ncbi.nlm.nih.gov/nuccore/NC_000908)) to find gene candidates. Notice that for this organism the stop codons are only TAA and TAG. Filter out the genes that are too short and contain only, say, L codons, and compare your candidate genes to the genes that are reported in the annotated genome. For comparison, computer recall and precision, and report on the dependence of these two accuracy scores on the length L of the open reading frames. Express the length of L in codons. Answer the questions below, include a figure with a precision/recall curve, and summarize your findings. 
+
+## Questions
+
+**What is the size of Mycoplasma genitalium genome?**
+
+580076 bp
+
+**How many genes does it include?**
+
 563
 
-What is the length of the smallest and the longest gene (in codons)? What is the median length of the gene (in codons)?
+**What is the length of the smallest and the longest gene (in codons)? What is the median length of the gene (in codons)?**
 
-What is the recall/precision of your gene finding procedure at L=50 and L=125 codons?
-
-
-Size of genom:  580076
-Number of genes:  563
 Shortest gene:  74
+
 Longest gene:  5418
+
 Median length of gene:  825
+
+**What is the recall/precision of your gene finding procedure at L=50 and L=125 codons?**
+
+TODO
