@@ -15,8 +15,8 @@ print(f"Done. Found {len(prots)} possible genes.")
 Ps = list()
 Rs = list()
 
-print("L\t| P\tR\t| F1\t| #")
-print("--------------------------------")
+print("L\t| P\tR\t| F1\t | #")
+print("---------------------------------------")
 for L in range(50, 500, 5):
     detected = set(filter(lambda x: (x[2] - x[1] + 1)/3 > L, prots))
 
@@ -28,7 +28,7 @@ for L in range(50, 500, 5):
     Ps.append(P)
     Rs.append(R)
 
-    print(f"{L}\t| {P:.2f}\t{R:.2f}\t| {F1:.2f}\t {len(detected)}")
+    print(f"{L}\t| {P:.2f}\t{R:.2f}\t| {F1:.2f}\t | {len(detected)}")
 
 import matplotlib.pyplot as plt
 
