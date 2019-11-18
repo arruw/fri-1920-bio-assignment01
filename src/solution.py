@@ -1,55 +1,21 @@
 import helpers as h
 
+print("Fetching sequence...")
 seq = h.getSequence()
+print("Done.")
+
+print("Fetching annotated genes...")
 genes = h.getGenes()
-# seq = 'ATG---TAG---ATG---ATG---+++TAA=ATG---TAG---ATG---ATG---+++TAA==ATG---TAG---ATG---ATG---+++TAA'
+print("Done.")
 
+print("Finding possible proteins...")
+prots = h.findProteins(1, seq) | h.findProteins(-1, h.reverseComplement(seq))
+print(f"Done. Found {len(prots)} possible genes.")
 
-def reverseComplement(rna):
-    complement = {
-        'A': 'T',
-        'T': 'A',
-        'C': 'G',
-        'G': 'C',
-    }
-    return ''.join([complement[c] for c in list(rna[::-1])])
+Ps = list()
+Rs = list()
 
-def findProteins(strand, rna):
-    stop = {
-        'TAA': True,
-        'TAG': True
-    }
-
-    offset = 0
-    proteins = set()
-    while(True):
-        # find start codon
-        start = rna.find('ATG')
-        if start == -1: break
-
-        for i in range(start, len(rna), 3):
-            # extract codon
-            codon = rna[i:i+3]
-
-            # we are at the end of sequence
-            if len(codon) != 3: break
-
-            # we found the stop codon
-            if stop.get(codon, False):
-                proteins.add((strand, offset+start+1, offset+i+3))
-                break
-
-        # remove processed chunks
-        rna = rna[start+3:]
-        offset += start+3
-
-    return proteins
-
-prots = findProteins(1, seq) | findProteins(-1, reverseComplement(seq))
-
-# print(prots)
-
-print("L\t| P\tR\t| F1")
+print("L\t| P\tR\t| F1\t| #")
 print("--------------------------------")
 for L in range(50, 500, 5):
     detected = set(filter(lambda x: (x[2] - x[1] + 1)/3 > L, prots))
@@ -59,4 +25,16 @@ for L in range(50, 500, 5):
     R = nTP / len(genes)
     F1 = 2*P*R/(P+R)
 
-    print(f"{L}\t| {P:.2f}\t{R:.2f}\t| {F1:.2f}")
+    Ps.append(P)
+    Rs.append(R)
+
+    print(f"{L}\t| {P:.2f}\t{R:.2f}\t| {F1:.2f}\t {len(detected)}")
+
+import matplotlib.pyplot as plt
+
+plt.plot(Rs, Ps)
+plt.xlabel("Recall")
+plt.ylabel("Precision")
+plt.title("Precision-Recall curve")
+plt.savefig("PR-curve.png")
+plt.show()

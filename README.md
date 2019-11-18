@@ -14,12 +14,15 @@ Implement a gene-finding algorithm that examines open reading frames and finds s
 
 **What is the length of the smallest and the longest gene (in codons)? What is the median length of the gene (in codons)?**
 
-Shortest gene:  74
-
-Longest gene:  5418
-
-Median length of gene:  825
+- Shortest gene:  74
+- Longest gene:  5418
+- Median length of gene:  825
 
 **What is the recall/precision of your gene finding procedure at L=50 and L=125 codons?**
 
-TODO
+| L (in codons)   | Precision | Recall |
+|-----------------|-----------|--------|
+| 50              | 0.08      | 0.47   |
+| 125             | 0.12      |	0.40   |
+
+![PR curve](PR-curve.png)
