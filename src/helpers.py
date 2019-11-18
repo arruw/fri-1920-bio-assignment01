@@ -40,6 +40,6 @@ def getGenes():
             # print("Median length of gene: ", median(geneLen))
 
 
-            sst = list(map(lambda f: (f.location.nofuzzy_start, f.location.nofuzzy_end), genes))
+            sst = set(map(lambda f: (f.strand, f.location.nofuzzy_start+1, f.location.nofuzzy_end), genes))
 
             return sst
