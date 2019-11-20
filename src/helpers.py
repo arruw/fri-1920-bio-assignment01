@@ -16,13 +16,13 @@ def getGenes():
 
     with Entrez.efetch(db="nucleotide", id=__ID, rettype="gb") as h:
         gb = SeqIO.read(h, "gb")
-        genes = list(filter(lambda f: f.type == "gene", gb.features))
+        genes = list(filter(lambda f: f.type == "CDS", gb.features))
 
         lengths = list(map(lambda f: (f.location.nofuzzy_end - f.location.nofuzzy_start)/3, genes))
 
-        print(f"Shortest length: {min(lengths):.1f}")
-        print(f"Longest length:  {max(lengths):.1f}")
-        print(f"Median length:   {median(lengths):.1f}")
+        print(f"Shortest length: {min(lengths)}")
+        print(f"Longest length:  {max(lengths)}")
+        print(f"Median length:   {median(lengths)}")
 
         sst = set(map(lambda f: (f.strand, f.location.nofuzzy_start+1, f.location.nofuzzy_end), genes))
         return sst

@@ -3,5 +3,9 @@
     "files.exclude": {
         ".env": true,
         "**/__pycache__": true
-    }
+    },
+    "latex-workshop.docker.enabled":true,
+    "latex-workshop.latex.search.rootFiles.include":[
+        "report/**/*.tex"
+    ]
 }

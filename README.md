@@ -6,25 +6,25 @@ Implement a gene-finding algorithm that examines open reading frames and finds s
 
 **What is the size of Mycoplasma genitalium genome?**
 
-580076 bp
+From the NCBI database: 580076 bp
 
 **How many genes does it include?**
 
-563
+From the NCBI database: 563
 
 **What is the length of the smallest and the longest gene (in codons)? What is the median length of the gene (in codons)?**
 
 |                 | Length [codons] |
 |-----------------|---------------- |
-|Shortest length  | 24.66           |
+|Shortest length  | 35              |
 |Longest length   | 1806            |
-|Median length    | 275             |
+|Median length    | 286             |
 
 **What is the recall/precision of your gene finding procedure at L=50 and L=125 codons?**
 
 | Length [codons]   | Precision | Recall |
 |-------------------|-----------|--------|
-| 50                | 0.08      | 0.47   |
-| 125               | 0.12      | 0.40   |
+| 50                | 0.08      | 0.50   |
+| 125               | 0.12      | 0.43   |
 
 ![PR curve](PR-curve.png)
