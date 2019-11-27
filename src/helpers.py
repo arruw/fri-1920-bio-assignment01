@@ -58,7 +58,10 @@ def findProteins(strand, rna):
 
             # we found the stop codon
             if stop.get(codon, False):
-                proteins.add((strand, offset+start+1, offset+i+3))
+                if strand == 1:
+                    proteins.add((strand, offset+start+1, offset+i+3))
+                elif strand == -1:
+                    proteins.add((strand, offset+i+3, offset+start+1))
                 break
 
         # remove processed chunks
