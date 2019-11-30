@@ -16,7 +16,7 @@ def getGenes():
 
     with Entrez.efetch(db="nucleotide", id=__ID, rettype="gb") as h:
         gb = SeqIO.read(h, "gb")
-        genes = list(filter(lambda f: f.type == "CDS", gb.features))
+        genes = list(filter(lambda f: f.type == "CDS" and 'translation' in f.qualifiers, gb.features))
 
         lengths = list(map(lambda f: (f.location.nofuzzy_end - f.location.nofuzzy_start)/3, genes))
 
@@ -58,10 +58,12 @@ def findProteins(strand, rna):
 
             # we found the stop codon
             if stop.get(codon, False):
+                start_i = offset+start+1
+                end_i = offset+i+3
                 if strand == 1:
-                    proteins.add((strand, offset+start+1, offset+i+3))
+                    proteins.add((strand, start_i, end_i))
                 elif strand == -1:
-                    proteins.add((strand, offset+i+3, offset+start+1))
+                    proteins.add((strand, 580076-end_i+1, 580076-start_i+1))
                 break
 
         # remove processed chunks

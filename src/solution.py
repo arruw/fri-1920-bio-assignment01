@@ -14,10 +14,11 @@ print(f"Done. Found {len(prots)} possible genes.")
 
 Ps = list()
 Rs = list()
+Ls = range(50, 500, 5)
 
 print("L\t| TP\tFP\t| P\tR\t| F1")
 print("------------------------------------------------------")
-for L in range(50, 500, 5):
+for L in Ls:
     detected = set(filter(lambda x: (x[2] - x[1] + 1)/3 > L, prots))
 
     N = len(detected)
@@ -34,9 +35,10 @@ for L in range(50, 500, 5):
 
 import matplotlib.pyplot as plt
 
-plt.plot(Rs, Ps)
-plt.xlabel("Recall")
-plt.ylabel("Precision")
-plt.title("Precision-Recall curve")
-plt.savefig("PR-curve.png")
+plt.plot(Ls, Ps)
+plt.plot(Ls, Rs)
+plt.xlabel("Length treshold")
+plt.title("Precision & Recall compared to the length treshold")
+plt.legend(['Precision', 'Recall'], loc='upper right')
+plt.savefig("L-PR-plot.png")
 plt.show()
